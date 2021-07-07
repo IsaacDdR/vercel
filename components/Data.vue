@@ -8,15 +8,17 @@
 </template>
 <script>
 export default {
+  async asyncData({ $http }) {
+    const artists = await $http.$get("https://lavoz.herokuapp.com/artistas");
+    return { artists };
+  },
   data() {
     return {
-      artists: []
+      artists: {}
     };
   },
-  async fetch() {
-    this.artists = await this.$http.$get(
-      "https://lavoz.herokuapp.com/artistas"
-    );
+  mounted() {
+    console.log(artists);
   }
 };
 </script>
